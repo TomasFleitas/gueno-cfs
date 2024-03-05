@@ -5,7 +5,7 @@ const GeoSchema = new mongoose.Schema({
   coordinates: { type: [Number], required: true },
 });
 
-const session = new mongoose.Schema({
+const snapshot = new mongoose.Schema({
   location: GeoSchema,
   sessionId: {
     type: String,
@@ -51,9 +51,9 @@ const session = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-session.index({ createdAt: 1 });
-session.index({ sesionId: 'text' });
+snapshot.index({ createdAt: 1 });
+snapshot.index({ sesionId: 'text' });
 
-const SessionModel = mongoose.model('Sessions', session);
+const SnapshotModel = mongoose.model('Snapshot', snapshot);
 
-export default SessionModel;
+export default SnapshotModel;

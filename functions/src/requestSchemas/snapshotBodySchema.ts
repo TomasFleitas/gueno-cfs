@@ -1,6 +1,6 @@
 import { Type, Static } from '@sinclair/typebox';
 
-export const sesisonBodySchema = Type.Object({
+export const snapshotBodySchema = Type.Object({
   location: Type.Optional(Type.Array(Type.Number())),
   'session-id': Type.Optional(Type.String()),
   eventType: Type.Optional(Type.String()),
@@ -28,4 +28,4 @@ export const sesisonBodySchema = Type.Object({
   ),
 });
 
-export type TSessionBodySchema = Static<typeof sesisonBodySchema>;
+export type TSnapshotBodySchema = Static<typeof snapshotBodySchema>;

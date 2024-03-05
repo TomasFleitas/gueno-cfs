@@ -2,13 +2,13 @@ import * as logger from 'firebase-functions/logger';
 import { MongoConnection } from '../models/connection';
 import { onRequest } from 'firebase-functions/v2/https';
 import { ALLOWED_SDK_CORS } from '../utils';
-import SessionModel from '../models/session.model';
 import {
   validateCompanyCors,
   validateRequestSchema,
   validateRequiredData,
 } from '../validations';
 import { CustomError } from '../errors';
+import SnapshotModel from '../models/snapshot.model';
 
 const mongoConn = new MongoConnection();
 
@@ -51,8 +51,8 @@ export const gather = onRequest(
 
       const companyConfig = await validateCompanyCors(secretKey, req);
 
-      /* ======update or upsert sessin information=======  */
-      await SessionModel.create({
+      /* ====== Create snapshot=======  */
+      await SnapshotModel.create({
         sessionId,
         location: {
           type: 'Point',

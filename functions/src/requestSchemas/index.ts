@@ -1,1 +1,1 @@
-export * from './sessionBodySchema';
+export * from './snapshotBodySchema';

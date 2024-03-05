@@ -10,7 +10,7 @@ export const validateRequiredData = ({ sessionId, secretKey }) => {
 };
 
 export const validateRequestSchema = (body: Request['body']) => {
-  const validation = validateRequest(body, requestSchemas.sesisonBodySchema);
+  const validation = validateRequest(body, requestSchemas.snapshotBodySchema);
   if (!validation.valid) throw new NotFound(JSON.stringify(validation.errors));
 };
 
