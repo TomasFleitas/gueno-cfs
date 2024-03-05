@@ -1,0 +1,29 @@
+{
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "firebase use dev && npm run build && firebase emulators:start --only functions",
+    "shell": "firebase use dev && npm run build && firebase functions:shell",
+    "deploy:dev": "firebase use dev && firebase deploy --only functions",
+    "start": "npm run shell",
+    "deploy:prod": "firebase use prod && firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@sinclair/typebox": "^0.32.13",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.7.0",
+    "jsonschema": "^1.4.1",
+    "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.0.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}

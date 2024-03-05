@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "dev": "gueno-sdk",
+    "prod": ""
+  }
+}
