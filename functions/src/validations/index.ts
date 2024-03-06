@@ -6,7 +6,7 @@ import { validateRequest } from '../schemaValidator/validators';
 
 export const validateRequiredData = ({ sessionId, clientKey }) => {
   if (!sessionId) throw new BadRequest('sessionId no provided');
-  if (!clientKey) throw new BadRequest('secret key no provided');
+  if (!clientKey) throw new BadRequest('client key no provided');
 };
 
 export const validateRequestSchema = (body: Request['body']) => {
@@ -18,7 +18,7 @@ export const validateCompanyCors = async (clientKey: string, req: Request) => {
   const companyConfig = await CompanyConfigModel.findOne({ clientKey });
   if (!companyConfig)
     throw new Forbidden(
-      `Company config not found for secret key: ${clientKey}`,
+      `Company config not found for client key: ${clientKey}`,
     );
 
   const origin = req.headers.origin;

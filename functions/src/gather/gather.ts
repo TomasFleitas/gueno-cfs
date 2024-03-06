@@ -1,7 +1,7 @@
 import * as logger from 'firebase-functions/logger';
 import { MongoConnection } from '../models/connection';
 import { onRequest } from 'firebase-functions/v2/https';
-import { ALLOWED_SDK_CORS } from '../utils';
+import { ALLOWED_SDK_CORS, CLIENT_KEY, SESSION_ID } from '../utils';
 import {
   validateCompanyCors,
   validateRequestSchema,
@@ -28,8 +28,8 @@ export const gather = onRequest(
       // Body
       const {
         location: coordinates,
-        ['session-id']: sessionIdFromBody,
-        ['secret-key']: secretKeyFromBody,
+        [SESSION_ID]: sessionIdFromBody,
+        [CLIENT_KEY]: clientKeyFromBody,
         eventType,
         clicks,
         timeOnApp,
@@ -40,12 +40,12 @@ export const gather = onRequest(
       // Headers
       const {
         ['X-Forwarded-For']: clientIp,
-        ['session-id']: sessionIdFromHeader,
-        ['secret-key']: secretKeyFromHeader,
+        [SESSION_ID]: sessionIdFromHeader,
+        [CLIENT_KEY]: clientKeyFromHeader,
       } = req.headers;
 
       const sessionId = sessionIdFromHeader || sessionIdFromBody;
-      const clientKey = secretKeyFromHeader || secretKeyFromBody;
+      const clientKey = clientKeyFromHeader || clientKeyFromBody;
 
       validateRequiredData({ sessionId, clientKey });
 
