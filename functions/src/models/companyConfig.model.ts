@@ -1,7 +1,7 @@
 import mongoose from './connection';
 
 const companyConfig = new mongoose.Schema({
-  secretKey: {
+  clientKey: {
     type: String,
     trim: true,
   },
@@ -10,7 +10,7 @@ const companyConfig = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-companyConfig.index({ secretKey: 'text' });
+companyConfig.index({ clientKey: 'text' });
 
 const CompanyConfigModel = mongoose.model('CompaniesConfig', companyConfig);
 

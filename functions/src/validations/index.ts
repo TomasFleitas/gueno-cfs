@@ -4,9 +4,9 @@ import CompanyConfigModel from '../models/companyConfig.model';
 import * as requestSchemas from '../requestSchemas';
 import { validateRequest } from '../schemaValidator/validators';
 
-export const validateRequiredData = ({ sessionId, secretKey }) => {
+export const validateRequiredData = ({ sessionId, clientKey }) => {
   if (!sessionId) throw new BadRequest('sessionId no provided');
-  if (!secretKey) throw new BadRequest('secret key no provided');
+  if (!clientKey) throw new BadRequest('secret key no provided');
 };
 
 export const validateRequestSchema = (body: Request['body']) => {
@@ -14,17 +14,17 @@ export const validateRequestSchema = (body: Request['body']) => {
   if (!validation.valid) throw new NotFound(JSON.stringify(validation.errors));
 };
 
-export const validateCompanyCors = async (secretKey: string, req: Request) => {
-  const companyConfig = await CompanyConfigModel.findOne({ secretKey });
+export const validateCompanyCors = async (clientKey: string, req: Request) => {
+  const companyConfig = await CompanyConfigModel.findOne({ clientKey });
   if (!companyConfig)
     throw new Forbidden(
-      `Company config not found for secret key: ${secretKey}`,
+      `Company config not found for secret key: ${clientKey}`,
     );
 
   const origin = req.headers.origin;
   if (!companyConfig.cors.includes(origin))
     throw new Forbidden(
-      `Origin '${origin}' not allowed for secret key: ${secretKey}`,
+      `Origin '${origin}' not allowed for secret key: ${clientKey}`,
     );
 
   return companyConfig;

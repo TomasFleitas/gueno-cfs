@@ -45,11 +45,11 @@ export const gather = onRequest(
       } = req.headers;
 
       const sessionId = sessionIdFromHeader || sessionIdFromBody;
-      const secretKey = secretKeyFromHeader || secretKeyFromBody;
+      const clientKey = secretKeyFromHeader || secretKeyFromBody;
 
-      validateRequiredData({ sessionId, secretKey });
+      validateRequiredData({ sessionId, clientKey });
 
-      const companyConfig = await validateCompanyCors(secretKey, req);
+      const companyConfig = await validateCompanyCors(clientKey, req);
 
       /* ====== Create snapshot=======  */
       await SnapshotModel.create({
